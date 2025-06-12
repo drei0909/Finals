@@ -135,6 +135,22 @@ if (isset($_POST['register'])) {
       background-color: #5d4037;
     }
 
+    .btn-secondary {
+      margin-top: 0.75rem;
+      background-color: transparent;
+      color: #6d4c41;
+      border: 2px solid #6d4c41;
+      font-weight: 600;
+      border-radius: 10px;
+      padding: 0.65rem;
+      transition: 0.3s ease;
+    }
+
+    .btn-secondary:hover {
+      background-color: #6d4c41;
+      color: #fff;
+    }
+
     footer {
       text-align: center;
       font-size: 0.85rem;
@@ -143,21 +159,31 @@ if (isset($_POST['register'])) {
     }
 
     .logo-container img {
-      max-width: 100px;
+      width: 120px;
+      height: auto;
       display: block;
       margin: 0 auto 1.5rem;
+      transition: transform 0.3s ease;
+    }
+
+    .logo-container img:hover {
+      transform: scale(1.05);
     }
   </style>
 </head>
 
 <body>
   <div class="form-wrapper">
+    <!-- Logo -->
     <div class="logo-container">
-      <img src="./assets/izana-logo.png" alt="IZANA Logo" />
+      <img src="./assets/izana-logo.jpg" alt="IZANA Logo" />
     </div>
+
+    <!-- Title and Subtitle -->
     <div class="form-title">Create Your Account</div>
     <div class="form-subtitle">Join IZANA and enjoy the finest blends with ease.</div>
 
+    <!-- Registration Form -->
     <form id="registrationForm" method="POST" novalidate>
       <div class="form-group">
         <i class="fa fa-user"></i>
@@ -190,6 +216,13 @@ if (isset($_POST['register'])) {
       </div>
 
       <button type="submit" name="register" class="btn btn-primary w-100">Register</button>
+
+      <!-- Login and Home Links -->
+      <a href="login.php" class="btn btn-secondary w-100">Already have an account? Login</a>
+
+      <a href="home.php" class="btn btn-outline-secondary w-100 mt-2">
+        <i class="fa fa-home me-1"></i> Back to Home
+      </a>
     </form>
 
     <footer>
@@ -202,6 +235,7 @@ if (isset($_POST['register'])) {
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <?= $sweetAlertConfig ?>
 
+  <!-- Password Validation -->
   <script>
     const form = document.getElementById('registrationForm');
     const password = document.getElementById('password');

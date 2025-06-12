@@ -14,6 +14,7 @@ if (isset($_POST['login'])) {
   $username = $_POST['username'];
   $password = $_POST['password'];
   $user = $con->loginUser($username, $password);
+
   if ($user) {
     $_SESSION['admin_ID'] = $user['admin_id'];
     $_SESSION['admin_FN'] = $user['admin_FN'];
@@ -139,6 +140,21 @@ if (isset($_POST['login'])) {
       background-color: #5d4037;
     }
 
+    .btn-secondary {
+      border-radius: 10px;
+      font-weight: 600;
+      padding: 0.75rem;
+      color: #6d4c41;
+      border: 2px solid #6d4c41;
+      background: transparent;
+      transition: 0.3s ease;
+    }
+
+    .btn-secondary:hover {
+      background-color: #6d4c41;
+      color: #fff;
+    }
+
     footer {
       text-align: center;
       font-size: 0.85rem;
@@ -157,7 +173,7 @@ if (isset($_POST['login'])) {
 <body>
   <div class="form-wrapper">
     <div class="logo-container">
-      <img src="./assets/izana-logo.png" alt="IZANA Logo" />
+      <img src="./assets/izana-logo.jpg" alt="IZANA Logo" />
     </div>
     <div class="form-title">Welcome Back</div>
     <div class="form-subtitle">Login to your IZANA account</div>
@@ -175,7 +191,11 @@ if (isset($_POST['login'])) {
         <label for="password">Password</label>
       </div>
 
-      <button type="submit" name="login" class="btn btn-primary w-100">Login</button>
+      <button type="submit" name="login" class="btn btn-primary w-100 mb-2">Login</button>
+
+      <a href="registration.php" class="btn btn-secondary w-100">
+        <i class="fa fa-arrow-left me-2"></i>Back to Registration
+      </a>
     </form>
 
     <footer>
