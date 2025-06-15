@@ -1,10 +1,26 @@
-<?php
+<?php 
+
 session_start();
-if (!isset($_SESSION['admin_ID'])) {
-  header('Location: login.php');
-  exit();
+require_once('./classes/database_customers.php');
+
+if (!isset($_SESSION['customer_ID'])) {
+    header('Location: login.php');
+    exit();
 }
-?>
+
+$db = new database_customers();
+$con = $db->getConnection();
+
+$customerId = $_SESSION['customer_ID'];
+
+$stmt = $con->prepare("SELECT profile_image FROM customers WHERE customer_id = ?");
+$stmt->execute([$customerId]);
+$customer = $stmt->fetch(PDO::FETCH_ASSOC);
+
+$profileImage = (!empty($customer['profile_image']) && file_exists('profile_image/' . $customer['profile_image']))
+    ? 'profile_image/' . $customer['profile_image']
+    : 'profile_image/default_user.png'; // fallback image
+?>x
 
 <!DOCTYPE html>
 <html lang="en">    
@@ -43,6 +59,17 @@ if (!isset($_SESSION['admin_ID'])) {
       position: absolute;
       top: 20px;
       right: 20px;
+    }
+
+    .profile-photo {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid #6d4c41;
     }
 
     h1 {
@@ -87,6 +114,9 @@ if (!isset($_SESSION['admin_ID'])) {
 <body>
 
   <div class="container-box">
+    <!-- Profile Photo -->
+    <img src="<?= $profileImage ?>" alt="Profile Photo" class="profile-photo">
+
     <!-- Logout Button -->
     <a href="logout.php" class="btn btn-outline-danger btn-sm logout-btn">
       <i class="bi bi-box-arrow-right"></i> Logout

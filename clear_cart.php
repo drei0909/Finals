@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once('./classes/database.php');
+require_once('./classes/database_customers.php');
 
 // Ensure an order exists
 if (!isset($_SESSION['order_id'])) {
@@ -11,8 +11,8 @@ if (!isset($_SESSION['order_id'])) {
 try {
     $orderId = $_SESSION['order_id'];
 
-    $db = new database();
-    $con = $db->opencon();
+   $db = new database_customers();
+$con = $db->getConnection();
 
     // Use a prepared statement to clear the cart
     $stmt = $con->prepare("DELETE FROM order_items WHERE order_id = ?");

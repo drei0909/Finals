@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once('./classes/database.php');
+require_once('./classes/database_customers.php');
 
 header('Content-Type: application/json');
 
@@ -18,7 +18,7 @@ if ($quantity < 1) {
     exit();
 }
 
-$db = new database();
+$db = new database_customers();
 $con = $db->opencon();
 
 // Update quantity

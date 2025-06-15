@@ -1,6 +1,6 @@
 <?php
-require_once('../classes/database.php');
-$con = new database();
+require_once('../classes/database_customers.php');
+$con = new database_customers();
 
 if (isset($_POST['username'])) {
     $username = $_POST['username'];
